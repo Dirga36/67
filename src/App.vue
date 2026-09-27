@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 const STORAGE_KEY = 'six-seven-high-score'
 const score = ref(0)
@@ -7,8 +7,6 @@ const highScore = ref(0)
 const sequence = ref('')
 const lastHit = ref('')
 const hitMessages = ['Nice one. Keep going!', 'Great hit!', 'You got it!', 'On a roll!']
-
-const progressLabel = computed(() => (sequence.value === '6' ? 'Now 7' : 'Press 6'))
 
 function pressNumber(number: '6' | '7') {
   if (number === '6') {
@@ -52,7 +50,7 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
 <template>
   <main class="min-h-screen bg-[#f4f1ea] font-mono text-[#173737]" aria-label="67 game">
     <section
-      class="grid h-[calc(100vh-120px)] min-h-[470px] grid-cols-2 border-b-[8px] border-black sm:h-[calc(100vh-128px)]"
+      class="grid h-[calc(100vh-120px)] grid-cols-2 border-b-[8px] border-black sm:h-[calc(100vh-128px)]"
       aria-label="Game controls"
     >
       <button class="border-none" aria-label="Press 6" @click="pressNumber('6')"></button>
@@ -78,8 +76,5 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
         }}</strong>
       </div>
     </section>
-    <p aria-live="polite">
-      {{ lastHit || progressLabel }}
-    </p>
   </main>
 </template>
