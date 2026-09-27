@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 
-const STORAGE_KEY = 'sixty-seven-high-score'
+const STORAGE_KEY = 'six-seven-high-score'
 const score = ref(0)
 const highScore = ref(0)
 const sequence = ref('')
 const lastHit = ref(false)
 
-const progressLabel = computed(() => (sequence.value === '6' ? 'Now tap 7' : 'Start with 6'))
+const progressLabel = computed(() => (sequence.value === '6' ? '6?' : '...'))
 
 function pressNumber(number: '6' | '7') {
   if (number === '6') {
@@ -89,7 +89,7 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
         >
       </div>
     </section>
-    <p class="sr-only" aria-live="polite">
+    <p aria-live="polite">
       {{ lastHit ? 'Nice one. Keep going!' : progressLabel }}
     </p>
   </main>
