@@ -2,14 +2,27 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import GameControls from './components/GameControls.vue'
 import ScoreBoard from './components/ScoreBoard.vue'
+import sevenOne from './assets/sounds/seven-1.mp3'
+import sevenTwo from './assets/sounds/seven2.mp3'
+import sixOne from './assets/sounds/six-1.mp3'
+import sixTwo from './assets/sounds/six-2.mp3'
 
+const SIX = [sixOne, sixTwo]
+const SEVEN = [sevenOne, sevenTwo]
 const STORAGE_KEY = 'six-seven-high-score'
 const score = ref(0)
 const highScore = ref(0)
 const sequence = ref('')
 const lastHit = ref('')
 
+function playRandomSound(sounds: string[]) {
+  const sound = new Audio(sounds[Math.floor(Math.random() * sounds.length)])
+  void sound.play()
+}
+
 function pressNumber(number: '6' | '7') {
+  playRandomSound(number === '6' ? SIX : SEVEN)
+
   if (number === '6') {
     sequence.value = '6'
     lastHit.value = ''
