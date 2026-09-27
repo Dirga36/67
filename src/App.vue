@@ -13,7 +13,7 @@ const hitMessages = [
   'On a roll!',
 ]
 
-const progressLabel = computed(() => (sequence.value === '6' ? '6?' : '...'))
+const progressLabel = computed(() => (sequence.value === '6' ? 'Now 7' : 'Press 6'))
 
 function pressNumber(number: '6' | '7') {
   if (number === '6') {
