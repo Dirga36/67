@@ -57,7 +57,7 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
 <template>
   <main class="min-h-screen bg-[#f4f1ea] font-mono text-[#173737]" aria-label="67 game">
     <section
-      class="grid h-[calc(100vh-120px)] min-h-[470px] grid-cols-2 border-b-[8px] border-black sm:h-[calc(100vh-128px)]"
+      class="grid h-[calc(80vh-100px)] min-h-[470px] grid-cols-2 border-b-[8px] border-black sm:h-[calc(80vh-108px)]"
       aria-label="Game controls"
     >
       <button
