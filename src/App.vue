@@ -6,7 +6,6 @@ const score = ref(0)
 const highScore = ref(0)
 const sequence = ref('')
 const lastHit = ref('')
-const hitMessages = ['Nice one. Keep going!', 'Great hit!', 'You got it!', 'On a roll!']
 
 function pressNumber(number: '6' | '7') {
   if (number === '6') {
@@ -20,7 +19,6 @@ function pressNumber(number: '6' | '7') {
     highScore.value = Math.max(highScore.value, score.value)
     localStorage.setItem(STORAGE_KEY, String(highScore.value))
     sequence.value = ''
-    lastHit.value = hitMessages[Math.floor(Math.random() * hitMessages.length)] ?? hitMessages[0]!
     window.setTimeout(() => {
       lastHit.value = ''
     }, 550)
@@ -50,11 +48,21 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
 <template>
   <main class="min-h-screen bg-[#f4f1ea] font-mono text-[#173737]" aria-label="67 game">
     <section
-      class="grid h-[calc(100vh-120px)] grid-cols-2 border-b-[8px] border-black sm:h-[calc(100vh-128px)]"
+      class="grid h-[calc(100vh-120px)] min-h-[470px] grid-cols-2 border-b-[8px] border-black sm:h-[calc(100vh-128px)]"
       aria-label="Game controls"
     >
-      <button class="border-none" aria-label="Press 6" @click="pressNumber('6')"></button>
-      <button class="border-none" aria-label="Press 7" @click="pressNumber('7')"></button>
+      <button
+        class="border-none"
+        aria-label="Press 6"
+        @click="pressNumber('6')"
+      >
+      </button>
+      <button
+        class="border-none"
+        aria-label="Press 7"
+        @click="pressNumber('7')"
+      >
+      </button>
     </section>
 
     <section
@@ -63,17 +71,19 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
     >
       <div class="flex flex-col">
         <span class="text-[11px] font-bold uppercase tracking-[.14em] text-[#7ca7a2]">Score</span
-        ><strong class="text-[clamp(3.5rem,7vw,5rem)] leading-[.8] text-[#003e4b]">{{
-          score.toString().padStart(2, '0')
-        }}</strong>
+        ><strong
+          class="text-[clamp(3.5rem,7vw,5rem)] leading-[.8]  text-[#003e4b]"
+          >{{ score.toString().padStart(2, '0') }}</strong
+        >
       </div>
       <div class="h-14 w-px bg-[#c8cbc4]"></div>
       <div class="flex flex-col">
         <span class="text-[11px] font-bold uppercase tracking-[.14em] text-[#8c9a9b]"
           >High score</span
-        ><strong class="text-[clamp(2.8rem,5vw,4.5rem)] leading-[.8] text-[#759096]">{{
-          highScore.toString().padStart(2, '0')
-        }}</strong>
+        ><strong
+          class="text-[clamp(2.8rem,5vw,4.5rem)] leading-[.8]  text-[#759096]"
+          >{{ highScore.toString().padStart(2, '0') }}</strong
+        >
       </div>
     </section>
   </main>
