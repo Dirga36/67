@@ -5,14 +5,20 @@ const STORAGE_KEY = 'six-seven-high-score'
 const score = ref(0)
 const highScore = ref(0)
 const sequence = ref('')
-const lastHit = ref(false)
+const lastHit = ref('')
+const hitMessages = [
+  'Nice one. Keep going!',
+  'Great hit!',
+  'You got it!',
+  'On a roll!',
+]
 
 const progressLabel = computed(() => (sequence.value === '6' ? '6?' : '...'))
 
 function pressNumber(number: '6' | '7') {
   if (number === '6') {
     sequence.value = '6'
-    lastHit.value = false
+    lastHit.value = ''
     return
   }
 
@@ -21,15 +27,15 @@ function pressNumber(number: '6' | '7') {
     highScore.value = Math.max(highScore.value, score.value)
     localStorage.setItem(STORAGE_KEY, String(highScore.value))
     sequence.value = ''
-    lastHit.value = true
+    lastHit.value = hitMessages[Math.floor(Math.random() * hitMessages.length)] ?? hitMessages[0]!
     window.setTimeout(() => {
-      lastHit.value = false
+      lastHit.value = ''
     }, 550)
     return
   }
 
   sequence.value = ''
-  lastHit.value = false
+  lastHit.value = ''
 }
 
 function handleKeydown(event: KeyboardEvent) {
@@ -90,7 +96,7 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
       </div>
     </section>
     <p aria-live="polite">
-      {{ lastHit ? 'Nice one. Keep going!' : progressLabel }}
+      {{ lastHit || progressLabel }}
     </p>
   </main>
 </template>
