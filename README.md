@@ -76,7 +76,7 @@ The app has no server, database, API, or automated test suite. Runtime persisten
 
 ## License
 
-No license has been declared in the repository yet.
+MIT
 
 ## AI Coding Guidance
 
